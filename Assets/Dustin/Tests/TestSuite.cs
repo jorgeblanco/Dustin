@@ -16,12 +16,13 @@ namespace Dustin.Tests
         {
             _itemDropped = new Item("test item");
             _resource = new Resource("test resource", _itemDropped, 1, 1);
-            _inventory = new Inventory();
+            _inventory = Inventory.Instance;
         }
 
         [TearDown]
         public void TearDown()
         {
+            _inventory.ResetInventory();
         }
         
         [Test]
