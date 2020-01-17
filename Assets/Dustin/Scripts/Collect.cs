@@ -16,7 +16,7 @@ namespace Dustin.Scripts
         private void OnTriggerEnter(Collider other)
         {
             var collectible = other.GetComponent<Collectible>();
-            if (collectible == null)
+            if (collectible == null || !collectible.CanCollect)
             {
                 return;
             }
