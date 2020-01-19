@@ -23,6 +23,8 @@ namespace Dustin.Scripts
         private FarmableResource farmableResource;
         [SerializeField]
         private float spawnRange = 0.3f;
+        [SerializeField]
+        private DebugText debugText;
 
         private Resource _resource;
 
@@ -43,10 +45,12 @@ namespace Dustin.Scripts
             Debug.Log($"Tool: {tool}");
             if (tool == null) return;
             Debug.Log($"Hit {farmableResource.resourceName} with {tool.toolType}");
+            debugText.SetText($"Hit {farmableResource.resourceName} with {tool.toolType}");
             var items = HandleHit(tool);
             if (items != null)
             {
                 Debug.Log($"Farmed {farmableResource.resourceName}");
+                debugText.SetText($"Farmed {farmableResource.resourceName}");
                 DropItems(items);
                 Destroy(gameObject);
             }
@@ -58,12 +62,14 @@ namespace Dustin.Scripts
             var hits = 1 + tool.toolStrength * toolBoost;
             Item[] items = _resource.ExploitResource(hits);
             Debug.Log($"Hit {farmableResource.resourceName} {hits} time(s)");
+            debugText.SetText($"Hit {farmableResource.resourceName} {hits} time(s)");
             return items;
         }
 
         private void DropItems(Item[] items)
         {
             Debug.Log($"Dropping {items.Length} {farmableResource.itemDrop.itemName}(s)");
+            debugText.SetText($"Dropping {items.Length} {farmableResource.itemDrop.itemName}(s)");
             
             // TODO: Actually spawn items from the item class, not the farmable resource class
             for (var i = 0; i < items.Length; i++)

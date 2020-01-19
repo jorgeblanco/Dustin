@@ -59,7 +59,7 @@ namespace OculusSampleFramework
         float m_objectPullVelocity = 10.0f;
         float m_objectPullMaxRotationRate = 360.0f; // max rotation rate in degrees per second
 
-        bool m_movingObjectToHand = false;
+        protected bool m_movingObjectToHand = false;
 
         // Objects can be distance grabbed up to this distance from the hand.
         [SerializeField]
@@ -382,5 +382,10 @@ namespace OculusSampleFramework
         {
             base.OffhandGrabbed(grabbable);
         }
+
+      protected override void GrabEnd()
+      {
+          base.GrabEnd();
+      }
     }
 }
